@@ -95,16 +95,16 @@
             calculation = amount
         }
         else if (from === "PLN") {
-            calculateResultfromPLN(amount, to);
+            return calculateResultfromPLN(amount, to);
         }
         else if (from === "EUR") {
-            calculateResultfromEUR(amount, to);
+            return calculateResultfromEUR(amount, to);
         }
         else if (from === "GBP") {
-            calculateResultfromGBP(amount, to);
+            return calculateResultfromGBP(amount, to);
         }
         else if (from === "USD") {
-            calculateResultfromUSD(amount, to)
+            return calculateResultfromUSD(amount, to)
         };
     };
 
