@@ -3,10 +3,6 @@
 
     welcome();
 
-    const backgroundButton = document.querySelector(".js-backgroundButton");
-    const form = document.querySelector(".js-form");
-
-
     const changeGraphics = () => {
         const background = document.querySelector(".js-background");
         const shadeName = document.querySelector(".js-shadeName");
@@ -14,8 +10,6 @@
         background.classList.toggle("document--dark");
         shadeName.innerText = background.classList.contains("document--dark") ? "jasny" : "ciemny";
     };
-
-    backgroundButton.addEventListener("click", changeGraphics);
 
     const calculateResultfromPLN = (amount, to) => {
         const PLNtoEUR = 0.2308;
@@ -98,7 +92,7 @@
 
     const writeResult = (event) => {
         event.preventDefault();
-        
+
         const amountInput = document.querySelector(".js-amount");
         const currencyFrom = document.querySelector(".js-currencyFrom");
         const currencyTo = document.querySelector(".js-currencyTo");
@@ -112,6 +106,13 @@
         resultText.innerText = `${amount.toFixed(2)} ${from} to ${calculation.toFixed(2)} ${to}`;
     };
 
-    form.addEventListener("submit", writeResult);
+    const listenEvents = () => {
+        const backgroundButton = document.querySelector(".js-backgroundButton");
+        const form = document.querySelector(".js-form");
 
+        form.addEventListener("submit", writeResult);
+        backgroundButton.addEventListener("click", changeGraphics);
+    };
+
+    listenEvents();
 };
