@@ -19,10 +19,6 @@
     display: inline-block;
 }
 
-.form__labelText--exchangeTo{
-    margin-left: 30px;
-}
-
 .form__input{
     width:100%;
     max-width: 560px;
@@ -31,6 +27,10 @@
 .form__select{
     padding: 3px;
     border-radius: 10px;
+}
+
+.form__select--from{
+    margin-right:30px;
 }
 
 .form__button{
