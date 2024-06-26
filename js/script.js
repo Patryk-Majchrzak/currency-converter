@@ -104,9 +104,11 @@
         else if (from === "USD") {
             return calculateResultfromUSD(amount, to)
         };
+
+        writeResult(amount, from, calculation, to);
     };
 
-    form.addEventListener("submit", calculateResult)
+    form.addEventListener("submit", calculateResult);
 
-    resultText.innerText = `${amount.toFixed(2)} ${from} to ${calculation.toFixed(2)} ${to}`;
+    const writeResult = (amount, from, calculation, to) => resultText.innerText = `${amount.toFixed(2)} ${from} to ${calculation.toFixed(2)} ${to}`;
 };
