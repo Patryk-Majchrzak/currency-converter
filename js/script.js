@@ -1,6 +1,10 @@
 {
     const welcome = () => console.log("Hello there!");
 
+    function formatNumber(number) {
+        return number.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, " ");
+      };
+
     const changeGraphics = () => {
         const background = document.querySelector(".js-background");
         const shadeName = document.querySelector(".js-shadeName");
@@ -101,7 +105,12 @@
 
         const calculation = calculateResult(amount, from, to);
 
-        resultText.innerText = `${amount.toFixed(2)} ${from} to ${calculation.toFixed(2)} ${to}`;
+        const formattedCalculation = formatNumberWithCommas(+calculation.toFixed(2));
+        const formattedAmount = formatNumberWithCommas(+amount.toFixed(2));
+
+        console.log(formatNumberWithCommas(213214.12))
+
+        resultText.innerText = `${formattedAmount} ${from} to ${formattedCalculation} ${to}`;
     };
 
     const listenEvents = () => {
