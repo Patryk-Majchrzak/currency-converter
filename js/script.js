@@ -20,8 +20,6 @@
 
     backgroundButton.addEventListener("click", changeGraphics);
 
-    form.addEventListener("submit", calculateResult)
-
     const calculateResultfromPLN = (amount, to) => {
         const PLNtoEUR = 0.2308;
         const PLNtoGBP = 0.1950;
@@ -107,6 +105,8 @@
             return calculateResultfromUSD(amount, to)
         };
     };
+
+    form.addEventListener("submit", calculateResult)
 
     resultText.innerText = `${amount.toFixed(2)} ${from} to ${calculation.toFixed(2)} ${to}`;
 };
