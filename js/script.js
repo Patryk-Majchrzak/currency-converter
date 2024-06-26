@@ -1,8 +1,6 @@
 {
     const welcome = () => console.log("Hello there!");
 
-    welcome();
-
     const changeGraphics = () => {
         const background = document.querySelector(".js-background");
         const shadeName = document.querySelector(".js-shadeName");
@@ -114,5 +112,10 @@
         backgroundButton.addEventListener("click", changeGraphics);
     };
 
-    listenEvents();
+    const init = () => {
+        welcome();
+        listenEvents();
+    };
+
+    init();
 };
