@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+        integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/document.css" rel="stylesheet">
+    <link href="css/container.css" rel="stylesheet">
+    <link href="css/section.css" rel="stylesheet">
+    <link href="css/form.css" rel="stylesheet">
+    <script defer src="js/script.js"></script>
+    <title>Kantor walut</title>
+</head>
+
+<body class="document js-background">
+    <button class="document__button js-backgroundButton">Włącz <span class="js-shadeName">ciemny</span> motyw</button>
+    <div class="container">
+        <section class="section">
+            <form class="form js-form">
+                <fieldset class="form__fieldset">
+                    <legend class="form__legend">Kalkulator walut</legend>
+                    <p>
+                        <label>
+                            <span class="form__labelText">Kwota</span>
+                            <input type="number" step="0.01" min="0.01" class="form__input js-amount" required>
+                        </label>
+                    </p>
+                    <p>
+                        <label>
+                            <span class="form__labelText">Zamień z</span>
+                            <select class="form__select js-currencyFrom">
+                                <option class="form__option">PLN</option>
+                                <option class="form__option">EUR</option>
+                                <option class="form__option">GBP</option>
+                                <option class="form__option">USD</option>
+                            </select>
+                        </label>
+                        <label>
+                            <span class="form__labelText form__labelText--exchangeTo">Zamień na</span>
+                            <select class="form__select js-currencyTo">
+                                <option class="form__option">PLN</option>
+                                <option class="form__option" selected>EUR</option>
+                                <option class="form__option">GBP</option>
+                                <option class="form__option">USD</option>
+                            </select>
+                        </label>
+                    </p>
+                </fieldset>
+                <p class="form__paragraph form__paragraph--centered form__paragraph--result">
+                    <strong class="js-result"></strong>
+                </p>
+                <p>
+                    <button class="form__button">Przelicz</button>
+                </p>
+                <p class="form__paragraph form__paragraph--centered">
+                    Dane liczone wg kursów z dnia 21.06.2024
+                </p>
+            </form>
+        </section>
+    </div>
+</body>
+
+</html>

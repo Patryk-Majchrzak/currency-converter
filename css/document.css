@@ -1,0 +1,20 @@
+.document{
+    background-color: rgb(68, 147, 47);
+    font-family: "Roboto", sans-serif;
+}
+
+.document--dark{
+    background-color: hsl(0, 0%, 15%);
+}
+
+.document__button{
+    background-color: hsl(115, 90%, 20%);
+    color:white;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 30px 50px;
+}
+
+.document--dark .document__button{
+    background-color: hsl(0, 0%, 35%);
+}

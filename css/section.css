@@ -1,0 +1,10 @@
+.section{
+    background-color: rgb(251, 251, 251);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 5px -5px 23px 12px #1b6323;
+}
+
+.document--dark .section{
+    box-shadow: 5px -5px 23px 12px #352e60;
+}
