@@ -1,8 +1,10 @@
 {
-    console.log("Hello there!");
+    const welcome = () => console.log("Hello there!");
+
+    welcome();
 
     const backgroundButton = document.querySelector(".js-backgroundButton");
-    const background = document.querySelector(".js-background")
+    const background = document.querySelector(".js-background");
     const shadeName = document.querySelector(".js-shadeName");
     const form = document.querySelector(".js-form");
     const amountInput = document.querySelector(".js-amount");
