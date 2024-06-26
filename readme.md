@@ -25,4 +25,3 @@ Hi! Welcome to my currency converter, where you can convert pick currency you wa
 1. JavaScript code has been closed in a block to avoid setting global functions or variables
 2. All JS interactions are closed in separated functions with function init called as a first one and then calling one further interactions
 3. For naming classes for HTML mark-ups I've used BEM convention for any class I was using in CSS. For classes used in JS I used prefixes "js-". All of them are written in camelCase.
-4. For paragraph with "zamień z" and "zamień na" selects I used flex layout creation module
