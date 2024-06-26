@@ -5,10 +5,7 @@
 
     const backgroundButton = document.querySelector(".js-backgroundButton");
     const form = document.querySelector(".js-form");
-    const amountInput = document.querySelector(".js-amount");
-    const resultText = document.querySelector(".js-result");
-    const currencyFrom = document.querySelector(".js-currencyFrom");
-    const currencyTo = document.querySelector(".js-currencyTo");
+
 
     const changeGraphics = () => {
         const background = document.querySelector(".js-background");
@@ -27,11 +24,11 @@
 
         switch (to) {
             case "EUR":
-                return calculation = amount * PLNtoEUR;
+                return amount * PLNtoEUR;
             case "GBP":
-                return calculation = amount * PLNtoGBP;
+                return amount * PLNtoGBP;
             case "USD":
-                return calculation = amount * PLNtoUSD;
+                return amount * PLNtoUSD;
         };
     };
 
@@ -42,11 +39,11 @@
 
         switch (to) {
             case "PLN":
-                return calculation = amount * EURtoPLN;
+                return amount * EURtoPLN;
             case "GBP":
-                return calculation = amount * EURtoGBP;
+                return amount * EURtoGBP;
             case "USD":
-                return calculation = amount * EURtoUSD;
+                return amount * EURtoUSD;
         };
     };
 
@@ -57,11 +54,11 @@
 
         switch (to) {
             case "PLN":
-                return calculation = amount * GBPtoPLN;
+                return amount * GBPtoPLN;
             case "EUR":
-                return calculation = amount * GBPtoEUR;
+                return amount * GBPtoEUR;
             case "USD":
-                return calculation = amount * GBPtoUSD;
+                return amount * GBPtoUSD;
         };
     };
 
@@ -72,25 +69,18 @@
 
         switch (to) {
             case "PLN":
-                return calculation = amount * USDtoPLN;
+                return amount * USDtoPLN;
             case "EUR":
-                return calculation = amount * USDtoEUR;
+                return amount * USDtoEUR;
             case "USD":
-                return calculation = amount * USDtoGBP;
+                return amount * USDtoGBP;
         };
     };
 
-    const calculateResult = (event) => {
-        event.preventDefault();
-
-        const amount = +amountInput.value;
-        const from = currencyFrom.value;
-        const to = currencyTo.value;
-
-        let calculation;
+    const calculateResult = (amount, from, to) => {
 
         if (from === to) {
-            calculation = amount
+            return amount
         }
         else if (from === "PLN") {
             return calculateResultfromPLN(amount, to);
@@ -104,11 +94,24 @@
         else if (from === "USD") {
             return calculateResultfromUSD(amount, to)
         };
-
-        writeResult(amount, from, calculation, to);
     };
 
-    form.addEventListener("submit", calculateResult);
+    const writeResult = (event) => {
+        event.preventDefault();
+        
+        const amountInput = document.querySelector(".js-amount");
+        const currencyFrom = document.querySelector(".js-currencyFrom");
+        const currencyTo = document.querySelector(".js-currencyTo");
+        const amount = +amountInput.value;
+        const from = currencyFrom.value;
+        const to = currencyTo.value;  
+        const resultText = document.querySelector(".js-result");
 
-    const writeResult = (amount, from, calculation, to) => resultText.innerText = `${amount.toFixed(2)} ${from} to ${calculation.toFixed(2)} ${to}`;
+        const calculation = calculateResult(amount, from, to);
+
+        resultText.innerText = `${amount.toFixed(2)} ${from} to ${calculation.toFixed(2)} ${to}`;
+    };
+
+    form.addEventListener("submit", writeResult);
+
 };
