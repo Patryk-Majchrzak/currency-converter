@@ -4,18 +4,21 @@
     welcome();
 
     const backgroundButton = document.querySelector(".js-backgroundButton");
-    const background = document.querySelector(".js-background");
-    const shadeName = document.querySelector(".js-shadeName");
     const form = document.querySelector(".js-form");
     const amountInput = document.querySelector(".js-amount");
     const resultText = document.querySelector(".js-result");
     const currencyFrom = document.querySelector(".js-currencyFrom");
     const currencyTo = document.querySelector(".js-currencyTo");
 
-    backgroundButton.addEventListener("click", () => {
+    const changeGraphics = () => {
+        const background = document.querySelector(".js-background");
+        const shadeName = document.querySelector(".js-shadeName");
+
         background.classList.toggle("document--dark");
         shadeName.innerText = background.classList.contains("document--dark") ? "jasny" : "ciemny";
-    });
+    };
+
+    backgroundButton.addEventListener("click", changeGraphics);
 
     form.addEventListener("submit", (event) => {
         event.preventDefault();
