@@ -28,9 +28,24 @@
     padding: 3px;
     border-radius: 10px;
 }
+.form__label {
+    display: inline-block;
+}
 
 .form__select--from{
     margin-right:30px;
+}
+
+@media(max-width:527px){
+    .form__select--from{
+        margin-bottom:10px;
+    };
+}
+
+@media(max-width:370px){
+    .form__select--from{
+        margin-right: 0;
+    }
 }
 
 .form__button{
