@@ -4,6 +4,7 @@
     background-repeat: cover;
     background-size: cover;
     font-family: "Roboto", sans-serif;
+    min-height:100vh;
 }
 
 .document__button{

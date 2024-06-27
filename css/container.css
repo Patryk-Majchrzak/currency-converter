@@ -1,5 +1,11 @@
-.container{
-    max-width:800px;
-    margin: 25% auto;
+.flexBox{
+    display: flex;
+    min-height: calc(100vh - 200px); /* 100px for button and 100px for .flexBox__container padding ; */
+    justify-content: center;
+    align-items: center;
+}
+
+.flexBox__container{
+    flex-basis:800px;
     padding: 50px;
 }
