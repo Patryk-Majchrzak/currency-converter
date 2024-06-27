@@ -2,7 +2,7 @@
     const welcome = () => console.log("Hello there!");
 
     function formatNumber(number) {
-        return number.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, " ");
+            return number.toFixed(2).replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, " ");
     };
 
     const changeGraphics = () => {
@@ -40,16 +40,16 @@
         const USDtoEUR = 0.9353;
         const USDtoGBP = 0.7901;
 
-        if (from==="PLN") {
+        if (from === "PLN") {
             return calculateResultfromCurrency(1, PLNtoEUR, PLNtoGBP, PLNtoUSD, amount, to);
         }
-        else if(from==="EUR") {           
+        else if (from === "EUR") {
             return calculateResultfromCurrency(EURtoPLN, 1, EURtoGBP, EURtoUSD, amount, to);
         }
-        else if(from==="GBP") {
+        else if (from === "GBP") {
             return calculateResultfromCurrency(GBPtoPLN, GBPtoEUR, 1, GBPtoUSD, amount, to);
         }
-        else if(from==="USD") {
+        else if (from === "USD") {
             return calculateResultfromCurrency(USDtoPLN, USDtoEUR, USDtoGBP, 1, amount, to);
         };
     };
@@ -67,8 +67,8 @@
 
         const calculation = calculateResult(amount, from, to);
 
-        const formattedCalculation = formatNumber(+calculation.toFixed(2));
-        const formattedAmount = formatNumber(+amount.toFixed(2));
+        const formattedCalculation = formatNumber(calculation);
+        const formattedAmount = formatNumber(amount);
 
         resultText.innerText = `${formattedAmount} ${from} to ${formattedCalculation} ${to}`;
     };
