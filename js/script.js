@@ -105,10 +105,8 @@
 
         const calculation = calculateResult(amount, from, to);
 
-        const formattedCalculation = formatNumberWithCommas(+calculation.toFixed(2));
-        const formattedAmount = formatNumberWithCommas(+amount.toFixed(2));
-
-        console.log(formatNumberWithCommas(213214.12))
+        const formattedCalculation = formatNumber(+calculation.toFixed(2));
+        const formattedAmount = formatNumber(+amount.toFixed(2));
 
         resultText.innerText = `${formattedAmount} ${from} to ${formattedCalculation} ${to}`;
     };
