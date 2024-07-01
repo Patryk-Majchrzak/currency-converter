@@ -54,15 +54,18 @@
     padding: 10px;
     width:100%;
     border-radius: 10px;
+    transition: background 0.5s, transform 1s;
 }
 
 .form__button:hover{
     background-color: hsl(115, 79%, 31%);
+    cursor: pointer;
+    transform: scale(1.05);
 }
 
 .form__button:active{
     background-color: hsl(115, 66%, 43%);
-    color:rgb(0, 0, 0);
+    color:hsl(0, 0%, 0%);
 }
 
 .document--dark .form__button{

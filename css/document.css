@@ -13,8 +13,30 @@
     padding: 10px;
     border-radius: 10px;
     margin: 30px 50px;
+    transition: background 0.5s, transform 1s;
 }
+
+.document__button:hover{
+    cursor: pointer;
+    transform: scale(1.1);
+    background-color: hsl(115, 90%, 25%);
+}
+
+.document__button:active{
+    cursor: pointer;
+    transform: scale(1.1);
+    background-color: hsl(115, 90%, 30%);
+}
+
 
 .document--dark .document__button{
     background-color: hsl(0, 0%, 35%);
+}
+
+.document--dark .document__button:hover{
+    background-color: hsl(0, 0%, 40%);
+}
+
+.document--dark .document__button:active{
+    background-color: hsl(0, 0%, 45%);
 }
