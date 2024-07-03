@@ -8,4 +8,18 @@
 .flexBox__container{
     flex-basis:800px;
     padding: 50px;
+    background-color: rgb(251, 251, 251);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 5px -5px 23px 12px #1b6323;
+}
+
+@media(max-width:992px) {
+    .flexBox__container{
+        max-width: 95%;
+    }
+}
+
+.document--dark .flexBox__container{
+    box-shadow: 5px -5px 23px 12px #352e60;
 }
