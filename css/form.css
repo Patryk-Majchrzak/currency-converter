@@ -22,10 +22,12 @@
 .form__input{
     width:100%;
     max-width: 560px;
+    padding: 7px;
+    border-radius: 10px;
 }
 
 .form__select{
-    padding: 3px;
+    padding: 5px;
     border-radius: 10px;
 }
 .form__label {
