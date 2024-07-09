@@ -2,7 +2,7 @@
     const welcome = () => console.log("Hello there!");
 
     function formatNumber(number) {
-            return number.toFixed(2).replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, " ");
+            return number.toFixed(2).replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
     };
 
     const changeGraphics = () => {
@@ -71,6 +71,8 @@
         const formattedAmount = formatNumber(amount);
 
         resultText.innerText = `${formattedAmount} ${from} to ${formattedCalculation} ${to}`;
+
+        amountInput.value=""
     };
 
     const listenEvents = () => {
