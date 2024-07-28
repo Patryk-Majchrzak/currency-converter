@@ -5,6 +5,28 @@
             return number.toFixed(2).replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
     };
 
+    const formatDate = (date) => {
+        return date.toLocaleString(
+            undefined,
+            {
+                weekday: "long",
+                day: "numeric",
+                month: "long",
+                year: "numeric",
+                hour: "numeric",
+                minute: "numeric",
+                second: "numeric",
+            }
+        )
+    };
+
+    const updateClock = () => {
+        const clockElement = document.querySelector(".js-clock");
+        const date= new Date()
+
+        clockElement.innerText = formatDate(date)
+    };
+
     const changeGraphics = () => {
         const background = document.querySelector(".js-background");
         const shadeName = document.querySelector(".js-shadeName");
@@ -13,44 +35,59 @@
         shadeName.innerText = background.classList.contains("document--dark") ? "jasny" : "ciemny";
     };
 
-    const calculateResultfromCurrency = (ratetoPLN, ratetoEUR, ratetoGBP, ratetoUSD, amount, to) => {
+    const calculateResultfromCurrency = (currencyObject, amount, to) => {
         switch (to) {
             case "PLN":
-                return amount * ratetoPLN;
+                return amount * currencyObject[`to${to}`];
             case "EUR":
-                return amount * ratetoEUR;
+                return amount * currencyObject[`to${to}`];
             case "GBP":
-                return amount * ratetoGBP;
+                return amount * currencyObject[`to${to}`];
             case "USD":
-                return amount * ratetoUSD;
+                return amount * currencyObject[`to${to}`];
         };
     };
 
     const calculateResult = (amount, from, to) => {
-        const PLNtoEUR = 0.2308;
-        const PLNtoGBP = 0.1950;
-        const PLNtoUSD = 0.2467;
-        const EURtoPLN = 4.3331;
-        const EURtoGBP = 0.8448;
-        const EURtoUSD = 1.0692;
-        const GBPtoPLN = 5.1291;
-        const GBPtoEUR = 1.1837;
-        const GBPtoUSD = 1.2656;
-        const USDtoPLN = 4.0527;
-        const USDtoEUR = 0.9353;
-        const USDtoGBP = 0.7901;
+        const PLN = {
+            toPLN: 1,
+            toEUR: 0.2308,
+            toGBP: 0.1958,
+            toUSD: 0.2467,
+        }
+
+        const EUR = {
+            toPLN: 4.3331,
+            toEUR: 1,
+            toGBP: 0.8448,
+            toUSD: 1.0692,
+        }
+
+        const GBP = {
+            toPLN: 5.1291,
+            toEUR: 1.1837,
+            toGBP: 1,
+            toUSD: 1.2656,
+        }
+
+        const USD = {
+            toPLN: 4.0527,
+            toEUR: 0.9353,
+            toGBP: 0.7901,
+            toUSD: 1,
+        }
 
         if (from === "PLN") {
-            return calculateResultfromCurrency(1, PLNtoEUR, PLNtoGBP, PLNtoUSD, amount, to);
+            return calculateResultfromCurrency(PLN, amount, to);
         }
         else if (from === "EUR") {
-            return calculateResultfromCurrency(EURtoPLN, 1, EURtoGBP, EURtoUSD, amount, to);
+            return calculateResultfromCurrency(EUR, amount, to);
         }
         else if (from === "GBP") {
-            return calculateResultfromCurrency(GBPtoPLN, GBPtoEUR, 1, GBPtoUSD, amount, to);
+            return calculateResultfromCurrency(GBP, amount, to);
         }
         else if (from === "USD") {
-            return calculateResultfromCurrency(USDtoPLN, USDtoEUR, USDtoGBP, 1, amount, to);
+            return calculateResultfromCurrency(USD, amount, to);
         };
     };
 
@@ -70,9 +107,8 @@
         const formattedCalculation = formatNumber(calculation);
         const formattedAmount = formatNumber(amount);
 
-        resultText.innerText = `${formattedAmount} ${from} to ${formattedCalculation} ${to}`;
+        resultText.innerText = `${formattedAmount} ${from} = ${formattedCalculation} ${to}`;
 
-        amountInput.value=""
     };
 
     const listenEvents = () => {
@@ -86,6 +122,8 @@
     const init = () => {
         welcome();
         listenEvents();
+        updateClock();
+        setInterval(updateClock, 1000);
     };
 
     init();
