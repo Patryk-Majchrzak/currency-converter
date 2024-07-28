@@ -90,6 +90,21 @@
 .form__paragraph--result{
     color: rgb(36, 112, 69);
     font-size: 20px;
+    display: grid;
+    grid-template-columns: auto 1fr;    
+    padding: 10px;
+    box-shadow: 1px 1px 0px 2px #ccc;
+    padding: 5px;
+    background-color: hsl(0, 0%, 95%);
+}
+
+.form__paragraph--clock{
+    display: flex;
+    justify-content: flex-end;
+    font-family: monospace;
+    font-size: 14px;
+    color: gray;
+    margin-top: 0;
 }
 
 .document--dark .form__paragraph--result{
