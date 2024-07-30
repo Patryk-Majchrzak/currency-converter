@@ -1,6 +1,8 @@
 {
     const welcome = () => console.log("Hello there!");
 
+    let rate = 1;
+
     const translations = {
         pl: {
             buttonText: "Włącz {0} motyw",
@@ -14,7 +16,7 @@
             to: "Zamień na",
             calculate: "Przelicz",
             result: "Wynik:",
-            dataDate: "Dane liczone wg kursów z dnia 21.06.2024"
+            dataDate: "Dane liczone wg kursów z dnia"
         },
         en: {
             buttonText: "Switch to {0} theme",
@@ -28,7 +30,7 @@
             to: "Change to",
             calculate: "Calculate",
             result: "Result:",
-            dataDate: "Data calculated based on exchange rates from 21.06.2024"
+            dataDate: "Data calculated based on exchange rates from"
         }
     };
 
@@ -59,67 +61,15 @@
     };
 
     const changeGraphics = () => {
-        const background = document.querySelector(".js-background");
+        const background = document.querySelector(".js-document");
         const shadeName = document.querySelector(".js-shadeName");
 
         background.classList.toggle("document--dark");
         shadeName.innerText = background.classList.contains("document--dark") ? "jasny" : "ciemny";
     };
 
-    const calculateResultfromCurrency = (currencyObject, amount, to) => {
-        switch (to) {
-            case "PLN":
-                return amount * currencyObject[`to${to}`];
-            case "EUR":
-                return amount * currencyObject[`to${to}`];
-            case "GBP":
-                return amount * currencyObject[`to${to}`];
-            case "USD":
-                return amount * currencyObject[`to${to}`];
-        };
-    };
-
-    const calculateResult = (amount, from, to) => {
-        const PLN = {
-            toPLN: 1,
-            toEUR: 0.2308,
-            toGBP: 0.1958,
-            toUSD: 0.2467,
-        }
-
-        const EUR = {
-            toPLN: 4.3331,
-            toEUR: 1,
-            toGBP: 0.8448,
-            toUSD: 1.0692,
-        }
-
-        const GBP = {
-            toPLN: 5.1291,
-            toEUR: 1.1837,
-            toGBP: 1,
-            toUSD: 1.2656,
-        }
-
-        const USD = {
-            toPLN: 4.0527,
-            toEUR: 0.9353,
-            toGBP: 0.7901,
-            toUSD: 1,
-        }
-
-        if (from === "PLN") {
-            return calculateResultfromCurrency(PLN, amount, to);
-        }
-        else if (from === "EUR") {
-            return calculateResultfromCurrency(EUR, amount, to);
-        }
-        else if (from === "GBP") {
-            return calculateResultfromCurrency(GBP, amount, to);
-        }
-        else if (from === "USD") {
-            return calculateResultfromCurrency(USD, amount, to);
-        };
+    const calculateResult = (amount) => {
+        return amount * rate
     };
 
     const writeResult = (event) => {
@@ -133,7 +83,7 @@
         const to = currencyTo.value;
         const resultText = document.querySelector(".js-result");
 
-        const calculation = calculateResult(amount, from, to);
+        const calculation = calculateResult(amount);
 
         const formattedCalculation = formatNumber(calculation);
         const formattedAmount = formatNumber(amount);
@@ -149,7 +99,7 @@
         document.querySelector(".js-backgroundButton").textContent = buttonText;
         document.querySelector(".js-today").textContent = t.today;
         document.querySelector(".js-legend").textContent = t.currencyCalculator;
-        document.querySelector(".js-zmountText").textContent = t.amount;
+        document.querySelector(".js-amountText").textContent = t.amount;
         document.querySelector(".js-amount").placeholder = t.amountPlaceholder;
         document.querySelector(".js-labelTextFrom").textContent = t.from;
         document.querySelectorAll(".js-labelTextTo").textContent = t.to;
@@ -169,19 +119,92 @@
         const backgroundButton = document.querySelector(".js-backgroundButton");
         const form = document.querySelector(".js-form");
         const languageSelectors = document.querySelectorAll(".js-flag");
+        const selectFrom = document.querySelector(".js-currencyFrom");
+        const selectTo = document.querySelector(".js-currencyTo");
 
         form.addEventListener("submit", writeResult);
         backgroundButton.addEventListener("click", changeGraphics);
         languageSelectors.forEach((languageSelector) =>
-            languageSelector.addEventListener("click", () => changeLanguage(languageSelector)))
+            languageSelector.addEventListener("click", () => changeLanguage(languageSelector)));
+        selectFrom.addEventListener("change", updateRate)
+        selectTo.addEventListener("change", updateRate)
     };
 
+    const updateRate = () => {
+        const from = document.querySelector(".js-currencyFrom").value;
+        const to = document.querySelector(".js-currencyTo").value;
+        fetchData(`https://v6.exchangerate-api.com/v6/67a7a303b054e72ce029ec5c/latest/${from}`, (error, data) => {
+            if (!error) {
+                rate = to === from ? 1 : data.conversion_rates[to];
+            }
+        });
+    };
+
+    const fetchData = (url, callback) => {
+        fetch(url)
+            .then(response => response.json())
+            .then(data => callback(null, data))
+            .catch(error => callback(error, null));
+    };
+
+    const updateCurrencies = (error, data) => {
+        if (error) {
+            form = document.querySelector(".js-from");
+            form.innerHTML = document.documentElement.lang === "pl"
+                ? "Wystąpił niespodziewany błąd, spróbuj ponownie później"
+                : "Unexpected error occured, please try again later"
+        } else {
+            let currencies = Object.keys(data.conversion_rates).sort();
+            rate = data.conversion_rates["EUR"]
+            date = data.time_last_update_utc;
+
+            updateCurrencySelects(currencies);
+            updateDateDisplay(date);
+        }
+    };
+
+    const updateCurrencySelects = (currencies) => {
+        const fromSelect = document.querySelector(".js-currencyFrom");
+        const toSelect = document.querySelector(".js-currencyTo");
+
+        const optionsHTML = currencies.map((currency) =>
+            `<option value="${currency}">${currency}</option>`
+        ).join('');
+
+        fromSelect.innerHTML = optionsHTML;
+        toSelect.innerHTML = optionsHTML;
+
+        fromSelect.value = "PLN";
+        toSelect.value = "EUR";
+    };
+
+    const updateDateDisplay = (date) => {
+        const refreshmentDate = document.querySelector(".js-refreshmentData");
+        refreshmentDate.innerHTML = formatRefreshmentDate(date)
+    };
+
+    const formatRefreshmentDate = (date) => {
+        return date.toLocaleString(
+            document.documentElement.lang,
+            {
+                day: "numeric",
+                month: "numeric",
+                year: "numeric",
+                hour: "numeric",
+                minute: "numeric",
+                second: "numeric",
+            }
+        )
+    }
+
     const init = () => {
+        const from = "PLN";
         welcome();
         listenEvents();
         updateClock();
         setInterval(updateClock, 1000);
+        fetchData(`https://v6.exchangerate-api.com/v6/67a7a303b054e72ce029ec5c/latest/${from}`, updateCurrencies)
     };
 
-    init();
+    document.addEventListener("DOMContentLoaded", init);
 };
