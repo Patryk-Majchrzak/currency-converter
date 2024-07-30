@@ -9,7 +9,10 @@ Hi! Welcome to my currency converter, where you can convert pick currency you wa
 
 ## Details for users
 
-1. Website is available only in polish (I am about to add language selection in thee future, so it will be available in english as well)
+1. Website is available in polish and english. You can switch th language by clicking appropiate flag.
+
+<img src="for_readme/changeLanguage.gif">
+
 2. You can change graphics by clicking "włącz ciemny  motyw" (enable dark motive) button. Button will now say "Włącz jasny motyw" (enable bright motive). If you click once again graphics will go back to default and button label will change once again to "włącz ciemny  motyw" (enable dark motive)
 
 <img src="for_readme/changeMotiveAnimation.gif">
