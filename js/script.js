@@ -1,13 +1,44 @@
 {
     const welcome = () => console.log("Hello there!");
 
+    const translations = {
+        pl: {
+            buttonText: "Włącz {0} motyw",
+            dark: "ciemny",
+            light: "jasny",
+            today: "Dzisiaj jest",
+            currencyCalculator: "Kalkulator walut",
+            amount: "Kwota",
+            amountPlaceholder: "wpisz kwotę",
+            from: "Zamień z",
+            to: "Zamień na",
+            calculate: "Przelicz",
+            result: "Wynik:",
+            dataDate: "Dane liczone wg kursów z dnia 21.06.2024"
+        },
+        en: {
+            buttonText: "Switch to {0} theme",
+            dark: "dark",
+            light: "light",
+            today: "Today is",
+            currencyCalculator: "Currency Calculator",
+            amount: "Amount",
+            amountPlaceholder: "enter amount",
+            from: "Change from",
+            to: "Change to",
+            calculate: "Calculate",
+            result: "Result:",
+            dataDate: "Data calculated based on exchange rates from 21.06.2024"
+        }
+    };
+
     function formatNumber(number) {
-            return number.toFixed(2).replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+        return number.toFixed(2).replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
     };
 
     const formatDate = (date) => {
         return date.toLocaleString(
-            undefined,
+            document.documentElement.lang,
             {
                 weekday: "long",
                 day: "numeric",
@@ -22,7 +53,7 @@
 
     const updateClock = () => {
         const clockElement = document.querySelector(".js-clock");
-        const date= new Date()
+        const date = new Date()
 
         clockElement.innerText = formatDate(date)
     };
@@ -111,12 +142,38 @@
 
     };
 
+    const updatePageContent = (language) => {
+        const t = translations[language]
+
+        const buttonText = t.buttonText.replace("{0}", document.body.classList.contains("dark") ? t.light : t.dark);
+        document.querySelector(".js-backgroundButton").textContent = buttonText;
+        document.querySelector(".js-today").textContent = t.today;
+        document.querySelector(".js-legend").textContent = t.currencyCalculator;
+        document.querySelector(".js-zmountText").textContent = t.amount;
+        document.querySelector(".js-amount").placeholder = t.amountPlaceholder;
+        document.querySelector(".js-labelTextFrom").textContent = t.from;
+        document.querySelectorAll(".js-labelTextTo").textContent = t.to;
+        document.querySelector(".js-formButton").textContent = t.calculate;
+        document.querySelector(".js-resultParagraph").firstChild.textContent = `${t.result} `;
+        document.querySelector(".js-dateParagraph").textContent = t.dataDate;
+    };
+
+    const changeLanguage = (languageSelector) => {
+        const language = languageSelector.alt
+        document.documentElement.lang = language
+        document.title = language === "pl" ? "Kantor walut" : "Currency converter"
+        updatePageContent(language)
+    };
+
     const listenEvents = () => {
         const backgroundButton = document.querySelector(".js-backgroundButton");
         const form = document.querySelector(".js-form");
+        const languageSelectors = document.querySelectorAll(".js-flag");
 
         form.addEventListener("submit", writeResult);
         backgroundButton.addEventListener("click", changeGraphics);
+        languageSelectors.forEach((languageSelector) =>
+            languageSelector.addEventListener("click", () => changeLanguage(languageSelector)))
     };
 
     const init = () => {

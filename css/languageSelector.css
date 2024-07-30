@@ -1,0 +1,32 @@
+.languageSelector__container{
+    position: relative;
+    float: right;
+    background-color: rgb(16, 119, 6);
+    margin-top:10px;
+    margin-right:10px;
+    cursor: pointer;
+}
+
+.document--dark .languageSelector__container{
+    background-color: hsl(0, 0%, 15%);
+}
+
+.languageSelector__flagImage{
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    padding: 5px;
+}
+
+/* .languageSelector__flagContainer--hidden{
+    opacity: 0;
+    position: absolute;
+    left: 0;
+    z-index: 1;
+    background-color: rgb(16, 119, 6);
+    transition: opacity 0.3s ease-in-out;
+} */
+
+.document--dark .languageSelector__flagContainer--hidden{
+    background-color: hsl(0, 0%, 15%);
+}

@@ -15,31 +15,42 @@
     <link href="css/document.css" rel="stylesheet">
     <link href="css/container.css" rel="stylesheet">
     <link href="css/form.css" rel="stylesheet">
+    <link href="css/languageSelector.css" rel="stylesheet">   
     <script defer src="js/script.js"></script>
     <meta property="og:image" content="images/opengraph.png">
     <link href="images/logo.png" rel="icon">
     <title>Kantor walut</title>
 </head>
 
-<body class="document js-background">
+<body class="document js-background"> 
+   <p class="languageSelector">
+        <div class="languageSelector__container">
+            <div class="languageSelector__flagContainer">
+                <img class="js-flag languageSelector__flagImage" src="images/flagPL.webp" alt="pl">
+            </div>
+            <div class="languageSelector__flagContainer--hidden">
+                <img class="js-flag languageSelector__flagImage" src="images/flagUK.svg" alt="en">
+            </div>
+        </div>
+    </p>
     <button class="document__button js-backgroundButton">Włącz <span class="js-shadeName">ciemny</span> motyw</button>
     <div class="flexBox">
         <div class="flexBox__container">
             <p class="form__paragraph form__paragraph--clock">
-                Dzisiaj jest <span class="js-clock"></span>
+                <span class="js-today">Dzisiaj jest </span>&nbsp;<span class="js-clock"></span>
             </p>
             <form class="form js-form">
                 <fieldset class="form__fieldset">
-                    <legend class="form__legend">Kalkulator walut</legend>
+                    <legend class="form__legend js-legend">Kalkulator walut</legend>
                     <p>
                         <label>
-                            <span class="form__labelText">Kwota</span>
+                            <span class="form__labelText js-zmountText">Kwota</span>
                             <input type="number" step="0.01" min="0.01" class="form__input js-amount" required placeholder="wpisz kwotę">
                         </label>
                     </p>
                     <p>
                         <label class="form__label">
-                            <span class="form__labelText">Zamień z</span>
+                            <span class="form__labelText js-labelTextFrom">Zamień z</span>
                             <select class="form__select form__select--from js-currencyFrom">
                                 <option class="form__option">PLN</option>
                                 <option class="form__option">EUR</option>
@@ -48,7 +59,7 @@
                             </select>
                         </label>
                         <label class="form__label">
-                            <span class="form__labelText">Zamień na</span>
+                            <span class="form__labelText js-labelTextTo">Zamień na</span>
                             <select class="form__select js-currencyTo">
                                 <option class="form__option">PLN</option>
                                 <option class="form__option" selected>EUR</option>
@@ -59,12 +70,12 @@
                     </p>
                 </fieldset>
                 <p>
-                    <button class="form__button">Przelicz</button>
+                    <button class="form__button js-formButton">Przelicz</button>
                 </p>
-                <p class="form__paragraph form__paragraph--centered form__paragraph--result">
+                <p class="form__paragraph form__paragraph--centered form__paragraph--result js-resultParagraph">
                     Wynik:  <strong class="js-result"></strong>
                 </p>
-                <p class="form__paragraph form__paragraph--centered">
+                <p class="form__paragraph form__paragraph--centered js-dateParagraph">
                     Dane liczone wg kursów z dnia 21.06.2024
                 </p>
             </form>
